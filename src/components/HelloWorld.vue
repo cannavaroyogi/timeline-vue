@@ -7,39 +7,42 @@
       <div class="timeline">
         <div class="checkpoint">
           <div>
-            <h2>Day 1: First Chat</h2>
-            <p>
+            <h2>13 April 2023 - First Chat On IG</h2>
+            <img :src="image1" alt="Yogi">
+            <!-- <p>
               Lorem ipsum doler sit amet, asdsadsa
-            </p>
+            </p> -->
           </div>
         </div>
         <div class="checkpoint">
           <div>
-            <h2>Day 2: We Just Meet</h2>
-            <p>
-              Lorem ipsum doler sit amet, asdsadsa
-            </p>
+            <h2>15 April : First Time Our Meet</h2>
+            <img :src="image2" alt="Yogi">
           </div>
         </div>
         <div class="checkpoint">
           <div>
-            <h2>Day 3: Taman Mini Indonesia Indah</h2>
-            <p>
-              Lorem ipsum doler sit amet, asdsadsa
-            </p>
+            <h2>30 April - Taman Mini Indonesia Indah</h2>
+            <img :src="image3" alt="Yogi">
           </div>
         </div>
         <div class="checkpoint">
           <div>
-            <h2>Day 4: Grand Indonesia</h2>
-            <p>
-              Lorem ipsum doler sit amet, asdsadsa
-            </p>
+            <h2>24 Juni: Grand Indonesia</h2>
+            <img :src="image4" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>24 Juni: Grand Indonesia (2)</h2>
+            <video autoplay muted loop>
+              <source :src="video1" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>
       <div class="footer">
-        <h1>"Masih berlanjut untuk hari-hari selanjutnya"</h1>
+        <h1>"Akan terus berlanjut untuk hari-hari selanjutnya"</h1>
       </div>
       <div class="audio">
         {{ currentAudioName || audioList[0].name }}
@@ -71,10 +74,16 @@ export default {
       currentAudioName: '',
       audioList: [
         {
-          name: 'Our Beloved Summer',
-          url: require('@/assets/sample-3s.mp3')
+          name: 'The 1975 - About You',
+          url: require('@/assets/about-you.mp3')
         }
-      ]
+      ],
+      image1: require('@/assets/first.jpeg'),
+      image2: require('@/assets/second.jpeg'),
+      image3: require('@/assets/third.jpeg'),
+      image4: require('@/assets/fourth.jpeg'),
+      video1: require('@/assets/givideo.mp4'),
+      bg: require('@/assets/yogi.jpeg'),
     }
   },
   methods: {
@@ -96,7 +105,8 @@ body {
   font-family: sans-serif;
   background:
     no-repeat center fixed
-    url(https://images.unsplash.com/photo-1495125057152-b661c82b067c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80);
+    /* url(https://drive.google.com/uc?export=view&id=1UVpsPa4-xbOrXopXCVTy65TkEzZ4etnZ); */
+    url(http://localhost:8080/bg2.jpeg);
   color: #fff;
   padding: 2em;
   background-size: cover;
@@ -104,7 +114,7 @@ body {
 
 body::before {
   content: '';
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, .6);
   position: absolute;
   top: 0;
   left: 0;
@@ -134,6 +144,21 @@ h2 {
   font-family: 'Pacifico';
 }
 
+.timeline img {
+  border-radius: 5%;
+  align-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.timeline video {
+  border-radius: 5%;
+  align-content: center;
+  width: 100%;
+  height: 600px;
+  margin-bottom: 15px;
+}
+
 .title {
   text-align: center;
   font-family: 'Pacifico';
@@ -147,11 +172,11 @@ h2 {
 
 .timeline {
   margin: 5em auto;
-  max-width: 34.15em;
+  max-width: 30em;
 }
 
 .checkpoint {
-  max-width: 34em;
+  max-width: 25em;
   padding-top: 2em;
   padding-bottom: 2em;
   position: relative;
@@ -171,13 +196,13 @@ h2 {
 .checkpoint:nth-child(odd) {
   border-left: 3px solid #888;
   padding-left: 3em;
-  transform: translateX(17em);
+  transform: translateX(15em);
 }
 
 .checkpoint:nth-child(even) {
   border-right: 3px solid #888;
   padding-right: 3em;
-  transform: translateX(-17em);
+  transform: translateX(-13em);
 }
 
 .checkpoint:nth-child(odd)::before,
