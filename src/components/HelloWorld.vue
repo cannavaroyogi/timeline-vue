@@ -1,58 +1,249 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+      <div class="title">
+        <h1>It's Our Journey</h1>
+        <p>Cannavaro Yogi & Ajeng Kiasti</p>
+      </div>
+      <div class="timeline">
+        <div class="checkpoint">
+          <div>
+            <h2>Day 1: First Chat</h2>
+            <p>
+              Lorem ipsum doler sit amet, asdsadsa
+            </p>
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>Day 2: We Just Meet</h2>
+            <p>
+              Lorem ipsum doler sit amet, asdsadsa
+            </p>
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>Day 3: Taman Mini Indonesia Indah</h2>
+            <p>
+              Lorem ipsum doler sit amet, asdsadsa
+            </p>
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>Day 4: Grand Indonesia</h2>
+            <p>
+              Lorem ipsum doler sit amet, asdsadsa
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <h1>"Masih berlanjut untuk hari-hari selanjutnya"</h1>
+      </div>
+      <div class="audio">
+        {{ currentAudioName || audioList[0].name }}
+        <audio-player autoplay
+          ref="audioPlayer"
+          :audio-list="audioList.map(elm => elm.url)"
+          :before-play="handleBeforePlay"
+          theme-color="#ffff"
+        />
+      </div>
   </div>
 </template>
 
 <script>
+import AudioPlayer from '@liripeng/vue-audio-player'
+
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components: {
+    AudioPlayer
+  },
+  data(){
+    return{
+      sumber: require('@/assets/sample-3s.mp3'),
+      currentAudioName: '',
+      audioList: [
+        {
+          name: 'Our Beloved Summer',
+          url: require('@/assets/sample-3s.mp3')
+        }
+      ]
+    }
+  },
+  methods: {
+    // Something to do before playing
+    handleBeforePlay(next) {
+      // There are a few things you can do here...
+      this.currentAudioName = this.audioList[this.$refs.audioPlayer.currentPlayIndex].name
+
+      next() // Start playing
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background:
+    no-repeat center fixed
+    url(https://images.unsplash.com/photo-1495125057152-b661c82b067c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80);
+  color: #fff;
+  padding: 2em;
+  background-size: cover;
 }
-ul {
-  list-style-type: none;
+
+body::before {
+  content: '';
+  background: rgba(0, 0, 0, .7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position: fixed;
+}
+
+* {
+  margin: 0;
   padding: 0;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.footer {
+  text-align: center;
+  font-family: 'Pacifico';
+  font-size: small;
 }
-a {
-  color: #42b983;
+h1 {
+  margin: 0.3em;
+  font-size: 3em;
+}
+
+h2 {
+  margin-bottom: 0.5em;
+  font-family: 'Pacifico';
+}
+
+.title {
+  text-align: center;
+  font-family: 'Pacifico';
+  font-size: 18px;
+}
+
+.audio {
+  max-width: 34em;
+  margin: 5em auto;
+}
+
+.timeline {
+  margin: 5em auto;
+  max-width: 34.15em;
+}
+
+.checkpoint {
+  max-width: 34em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  position: relative;
+}
+
+.checkpoint div {
+  border: 2px solid #888;
+  border-radius: 1em;
+  padding: 1.5em;
+}
+
+.checkpoint p {
+  line-height: 27px;
+  color: #ccc;
+}
+
+.checkpoint:nth-child(odd) {
+  border-left: 3px solid #888;
+  padding-left: 3em;
+  transform: translateX(17em);
+}
+
+.checkpoint:nth-child(even) {
+  border-right: 3px solid #888;
+  padding-right: 3em;
+  transform: translateX(-17em);
+}
+
+.checkpoint:nth-child(odd)::before,
+.checkpoint:nth-child(even)::before {
+  content: '';
+  background: #888;
+  width: 3em;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.checkpoint:nth-child(odd)::before {
+  left: 0;
+}
+
+.checkpoint:nth-child(even)::before {
+  right: 0;
+}
+
+.checkpoint:nth-child(odd) div::before,
+.checkpoint:nth-child(even) div::before {
+  content: '';
+  background: #fff;
+  box-shadow: 0 0 0.5em #0d71fc;
+  width: 0.8em;
+  height: 0.8em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+
+.checkpoint:nth-child(odd) div::before {
+  left: -0.5em;
+}
+
+.checkpoint:nth-child(even) div::before {
+  right: -0.5em;
+}
+
+@media screen and (max-width: 1150px) {
+  .timeline {
+    width: 80vw;
+  }
+  .timeline .checkpoint {
+    width: 100%;
+    transform: none;
+    padding-left: 0 ;
+    padding-right: 0;
+    border: none;
+  }
+
+  .timeline .checkpoint::before {
+    width: 3px;
+    height: 4em;
+    top: -2em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .timeline .checkpoint div::before {
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>
