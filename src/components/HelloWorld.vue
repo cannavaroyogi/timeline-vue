@@ -4,10 +4,10 @@
         <h1>It's Our Journey</h1>
         <p>Cannavaro Yogi & Ajeng Kiasti</p>
       </div>
-      <div class="timeline">
+      <div class="timeline" ref="timeline">
         <div class="checkpoint">
           <div>
-            <h2>13 April 2023 - First Chat On IG</h2>
+            <h2>13 April - First Chat On IG</h2>
             <img :src="image1" alt="Yogi">
             <!-- <p>
               Lorem ipsum doler sit amet, asdsadsa
@@ -28,6 +28,26 @@
         </div>
         <div class="checkpoint">
           <div>
+            <h2> 30 April - Melukis di TMII</h2>
+            <video autoplay muted loop>
+              <source :src="video2" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>20 Mei - Plaza Semanggi</h2>
+            <img :src="image5" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>28 Mei - Onkel John's Cofee</h2>
+            <img :src="image6" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
             <h2>24 Juni: Grand Indonesia</h2>
             <img :src="image4" alt="Yogi">
           </div>
@@ -40,7 +60,40 @@
             </video>
           </div>
         </div>
+        <div class="checkpoint">
+          <div>
+            <h2>27 Juni - Sarinah</h2>
+            <img :src="image7" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>17 Agustus - Hari Pertama</h2>
+            <img :src="kuningan1" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>17 Agustus - Hari Pertama (2)</h2>
+            <img :src="kuningan2" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>18 Agustus - Botanika, Peresmian</h2>
+            <img :src="botanika" alt="Yogi">
+          </div>
+        </div>
+        <div class="checkpoint">
+          <div>
+            <h2>19 Agustus: Cirebon Movie Date</h2>
+            <video autoplay muted loop>
+              <source :src="video3" type="video/mp4">
+            </video>
+          </div>
+        </div>
       </div>
+      
       <div class="footer">
         <h1>"Akan terus berlanjut untuk hari-hari selanjutnya"</h1>
       </div>
@@ -82,7 +135,15 @@ export default {
       image2: require('@/assets/second.jpeg'),
       image3: require('@/assets/third.jpeg'),
       image4: require('@/assets/fourth.jpeg'),
+      image5: require('@/assets/semanggi.jpeg'),
+      image6: require('@/assets/onkeljohn.jpeg'),
+      image7: require('@/assets/sarinah.jpeg'),
+      kuningan1: require('@/assets/kuningan1.jpeg'),
+      kuningan2: require('@/assets/kuningan2.jpeg'),
+      botanika: require('@/assets/botanika.jpeg'),
       video1: require('@/assets/givideo.mp4'),
+      video2: require('@/assets/melukis.mp4'),
+      video3: require('@/assets/cirebon.mp4'),
       bg: require('@/assets/yogi.jpeg'),
     }
   },
@@ -93,8 +154,46 @@ export default {
       this.currentAudioName = this.audioList[this.$refs.audioPlayer.currentPlayIndex].name
 
       next() // Start playing
+    },
+
+    startAutoScroll() {
+      const timeline = this.$refs.timeline;
+
+      // Calculate the total scrollable height of the timeline
+      const scrollHeight = timeline.scrollHeight - timeline.clientHeight;
+
+      // Set the initial scroll position to 0
+      let currentScroll = 0;
+
+      // Define the scroll speed and interval duration (you can adjust these values)
+      const scrollSpeed = 1; // Increase for slower scroll, decrease for faster scroll
+      const intervalDuration = 50; // Adjust the interval duration as needed
+
+      // Start auto-scrolling using setInterval
+      this.autoScrollInterval = setInterval(() => {
+        // Calculate the next scroll position
+        currentScroll += scrollSpeed;
+
+        // Update the scroll position
+        timeline.scrollTop = currentScroll;
+
+        // Check if we've reached the bottom of the timeline
+        if (currentScroll >= scrollHeight) {
+          // Reset to the top
+          currentScroll = 0;
+        }
+      }, intervalDuration);
     }
-  }
+
+  },
+  mounted() {
+    // Start auto-scrolling when the component is mounted
+     this.startAutoScroll();
+  },
+  beforeUnmount() {
+    // Stop auto-scrolling when the component is destroyed to prevent memory leaks
+    clearInterval(this.autoScrollInterval);
+  },
 }
 </script>
 
